@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //1.Convert Tostring
+
+        const arr = ['Java', 'C#', 'Ruby', 'JavaScript', 'ReactJs'];
+
+        console.log(arr.toString());
+
+        //2. Join giống như tostring tuy nhiên có thể thay thế dấu phẩy bằng các ký tự khác
+
+        const arr2 = ['Java', 'C#', 'Ruby', 'JavaScript', 'ReactJs'];
+
+        console.log(arr.join(''))
+
+
+        //3. Pop xóa phần từ cuối cùng ra khỏi mảng
+
+        const number = [1, 2, 7, 9, 12]
+        console.log("Phần từ bị xóa là: ", number.pop())
+        console.log(number)
+
+        //4. push thêm 1 phần từ vào cuối mảng
+
+        const courses = ['Java', 'C#', 'Ruby', 'JavaScript', 'ReactJs'];
+        courses.push("Angular Js")
+        console.log(courses)
+
+
+        //5 . unshift thêm 1 phần tử vào đầu mảng
+
+
+        const courses2 = ['Java', 'C#', 'Ruby', 'JavaScript', 'ReactJs'];
+        courses2.unshift("Angular Js")
+        console.log(courses2)
+
+        //6. shift xóa 1 phần tử ở đầu mảng
+        courses2.shift()
+        console.log(courses2)
+
+
+        //7. length thêm 1 phần tử vào mảng không cần pop()
+
+        courses[courses.length] = "Python"
+        console.log(courses)
+
+        //8. delete() xóa 1 phần tử trong mảng
+
+        delete courses[3]
+        console.log(courses)
+
+        //9. concat() nối chuỗi lại với nhau
+        console.log(courses.concat(courses2))
+
+        console.log(courses.concat("React Native"))
+
+
+        //10. splice thêm 1 mục mới vào mangr ở vị trí bất kỳ
+
+        courses.splice(3, 2, "Sql") //
+        console.log(courses)
+
+        const fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+        // dùng để xóa
+        fruits.splice(0, 1);
+        console.log(fruits)
+
+        //11. slice tách 1 mảng thành mảng mới
+
+        var courseSlice = courses.slice(3, 6)
+
+        console.log(courseSlice)
+
+        //12. Array.of
+
+        const numbers = Array.of('1,2,3,4,4')
+        console.log(numbers)
+
+        //13. sort lọc giả trị bé thứ n
+        const point = [40, 20, 190, 250, 360]
+        point.sort((a, n) => {
+            return a - n
+        })
+        console.log(point[3]);
+
+
+        ///14.Array.prototype.copyWithin() 
+
+        let nums = [1, 4, 6, 9, 3, 2]
+
+
+
+
+
+        nums.copyWithin.call({
+            length: 5,
+            3: 1
+        }, 0, 3)
+
+        console.log(nums)
+    </script>
+</body>
+
+</html>

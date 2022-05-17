@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+
+    <div id="root">
+
+    </div>
+
+    <script type="text/babel">
+
+        function Post_item(props){ console.log(props.tittle); return (
+
+        <div>
+
+            <img src="https://files.fullstack.edu.vn/f8-prod/blog_posts/3322/6269f3651a3eb.jpg"></img>
+            <h2 className="post-tittle">{props.tittle}</h2>
+            <p className="post-desc">{props.decription}</p>
+            <p className="post-published">Một ngày trước . 5 phút đọc</p>
+        </div>
+
+        ) }; function App(){ return (
+
+        <div id="wrapper">
+            <Post_item tittle="Sản phẩm react sau 2 tuần chăm chỉ học tại f8 " image="https://files.fullstack.edu.vn/f8-prod/blog_posts/3322/6269f3651a3eb.jpg" decription="Mình là một học viên đang sinh sống và làm việc tại Nhật Bản , Vốn là dân trái ngành muốn quay đầu học lại IT để có thể tìm kiếm..."
+                published="5' trước" />
+        </div>
+        ) } ReactDOM.render(
+        <App/>,document.getElementById('root'))
+    </script>
+
+
+
+</body>
+
+</html>
