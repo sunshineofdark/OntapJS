@@ -1,0 +1,14 @@
+{
+  "courses": [
+    {
+      "name": "C#",
+      "decription": "Lập trình hướng đối tương",
+      "id": 1
+    },
+    {
+      "name": "Java",
+      "decription": "JavaScript cơ bản",
+      "id": 2
+    }
+  ]
+}

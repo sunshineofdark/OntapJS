@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>insertAdjacentHTML() Demo</title>
+</head>
+
+<body>
+    <ui id="list">
+        <li>CSS</li>
+
+    </ui>
+
+    <script>
+        let list = document.querySelector('#list')
+
+        list.insertAdjacentHTML('beforebegin', '<h1>Welcome to</h1>')
+        list.insertAdjacentHTML('afterbegin', '<li>HTML</li>')
+        list.insertAdjacentHTML('beforeend', '<li>TypeScript</li>')
+        list.insertAdjacentHTML('afterend', '<p>Đăng kí ngay đê</p>')
+    </script>
+</body>
+
+</html>

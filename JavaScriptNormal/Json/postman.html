@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div>
+        <h2>Danh sách khóa học</h2>
+        <ul id="list_courses">
+
+        </ul>
+
+    </div>
+
+    <div>
+        <div>
+            <label for="">Name</label>
+            <input type="text" name="name" id="">
+        </div>
+        <div>
+            <label for="">Decription</label>
+            <input type="text" name="decription">
+        </div>
+        <div>
+            <button id="create">Create</button>
+        </div>
+    </div>
+    <script>
+        var lstcourse = document.querySelector('#list_courses');
+
+        var courseApi = 'http://localhost:3000/courses'
+
+        function start() {
+            getCourse(renderCourse)
+            handleCreate()
+        }
+
+        function getCourse(callback) {
+            fetch(courseApi).then(function(respone) {
+                    return respone.json()
+                })
+                .then(callback)
+        }
+
+        function renderCourse(courses) {
+            var lstcourseBlock = document.querySelector('#list_courses');
+            var htmls = courses.map(
+                function(course) {
+                    return `
+                  <li class="course-item-${course.id}">
+                    <h4> ${course.name}</h4>   
+                    <p> ${course.decription}</p> 
+                    <button onclick="handleDeleteCourse(${course.id})">Xóa</button>
+                    <button onclick="handleUpdate(${course.id})">Update</button>
+                  </li>
+                `
+
+                })
+
+            lstcourseBlock.innerHTML = htmls.join('')
+
+        }
+
+        function handleDeleteCourse(id) {
+            var option = {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            fetch(courseApi + '/' + id, option).then(function(respone) {
+                respone.json()
+            }).then(function() {
+                var courseitem = document.querySelector('.course-item-' + id)
+                if (courseitem) {
+                    courseitem.remove()
+                }
+            })
+        }
+
+        function updateCourse(id, data, callback) {
+            var option = {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }
+            fetch(courseApi, option).then(function(respone) {
+                respone.json()
+            }).then(callback)
+        }
+
+        function createCourse(data, callback) {
+            var option = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }
+            fetch(courseApi, option).then(function(respone) {
+                respone.json()
+            }).then(callback)
+        }
+
+        function handleCreate() {
+            var createbtn = document.querySelector('#create')
+
+            createbtn.onclick = function() {
+                var name = document.querySelector('input[name="name"]').value
+                var decription = document.querySelector('input[name="decription"]').value
+
+                var formData = {
+                    name: name,
+                    decription: decription
+                }
+
+                createCourse(formData, function() {
+                    getCourse(renderCourse)
+                })
+            }
+        }
+
+        function handleUpdate(id) {
+
+            var name = document.querySelector('input[name="name"]').value
+            var decription = document.querySelector('input[name="decription"]').value
+
+            var formData = {
+                name: name,
+                decription: decription
+            }
+
+            updateCourse(id, formData, function() {
+                getCourse(renderCourse)
+            })
+
+        }
+        start()
+    </script>
+</body>
+
+</html>

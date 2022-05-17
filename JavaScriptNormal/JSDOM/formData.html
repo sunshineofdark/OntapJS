@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="subscribe.php" method="post" id="subscription">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" />
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" />
+        </div>
+        <div>
+            <button type="submit" id="submit">Subscribe</button>
+        </div>
+    </form>
+
+
+
+    <script>
+        const btn = document.querySelector('#submit');
+        const form = document.querySelector('#subscription');
+        const messageEl = document.querySelector('#message');
+
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            subscribe();
+        });
+
+        const subscribe = async() => {
+            try {
+                let response = await fetch('subscribe.php', {
+                    method: 'POST',
+                    body: new FormData(form),
+                });
+                const result = await response.json();
+
+                showMessage(result.message, response.status == 200 ? 'success' : 'error');
+
+            } catch (error) {
+                showMessage(error.message, 'error');
+            }
+        };
+
+        const showMessage = (message, type = 'success') => {
+            messageEl.innerHTML = `
+        <div class="alert alert-${type}">
+        ${message}
+        </div>
+    `;
+        };
+    </script>
+</body>
+
+</html>

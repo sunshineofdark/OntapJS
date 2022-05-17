@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul class="menu">
+
+    </ul>
+
+    <div class="container"></div>
+    <ul id="first-list">
+        <li>Everest</li>
+        <li>Fuji</li>
+        <li>Kilimanjaro</li>
+    </ul>
+
+    <ul id="second-list">
+        <li>Karakoram Range</li>
+        <li>Denali</li>
+        <li>Mont Blanc</li>
+    </ul>
+
+    <script>
+        let div = document.querySelector('.container');
+        div.innerHTML += '<p class="note">JS DOM</p>';
+        const createLi = (name) => {
+            let li = document.createElement('li')
+            li.innerHTML = name
+            return li
+        }
+        const menu = document.querySelector('.menu')
+        menu.appendChild(createLi("Home"))
+        menu.appendChild(createLi("Products"))
+        menu.appendChild(createLi("User"))
+
+        // get the first list
+        const firstList = document.querySelector('#first-list');
+        // take the first child element
+        const everest = firstList.firstElementChild;
+        // get the second list
+        const secondList = document.querySelector('#second-list');
+        // append the everest to the second list
+        secondList.appendChild(everest)
+
+
+        /* Sử dụng DocumentFragment  */
+
+        let div2 = document.querySelector('.container')
+
+
+
+        let fragment = document.createDocumentFragment()
+
+        for (let i = 0; i < 100; i++) {
+            let p = document.createElement('p')
+            p.textContent = `Ảnh ${i}`
+            fragment.appendChild(p)
+        }
+        div.appendChild(fragment)
+    </script>
+</body>
+
+</html>

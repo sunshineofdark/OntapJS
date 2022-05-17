@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Get ParentNode -->
+    <div id="main">
+        <p class="note">
+            This is a note
+            <p>ok</p>
+        </p>
+    </div>
+    <!--Get Child Element -->
+
+    <ul id="menu">
+        <li class="first">Home</li>
+        <li>Products</li>
+        <li class="current">Customer Support</li>
+        <li>Careers</li>
+        <li>Inventor</li>
+        <li>News</li>
+        <li class="last">About Us</li>
+    </ul>
+    <script>
+        /* Get ParentNode */
+        let note = document.querySelector('.note')
+        console.log(note.parentNode)
+
+        /* Get Child Element */
+
+        let content = document.getElementById('menu')
+        let firstChild = content.lastElementChild
+
+        console.log(firstChild)
+
+        let menu = document.getElementById('menu');
+        let children = menu.children;
+        console.log(children);
+    </script>
+</body>
+
+</html>
