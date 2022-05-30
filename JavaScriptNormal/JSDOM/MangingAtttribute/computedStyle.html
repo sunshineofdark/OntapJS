@@ -29,7 +29,12 @@
         let message = document.querySelector('.message')
         let style = getComputedStyle(message)
 
-
+        if (typeof(Storage) !== "undefined") {
+            var domain = 'freetuts.net';
+            localStorage.setItem('domain', domain);
+        } else {
+            document.write('Trình duyệt của bạn không hỗ trợ local storage');
+        }
         console.log('color:', style.color)
 
         console.log('background-color:', style.backgroundColor)

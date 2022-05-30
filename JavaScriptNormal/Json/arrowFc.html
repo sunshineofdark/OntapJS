@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="click" type="button" value="Click" />
+    <span id="showInfo"></span>
+    <script>
+        var user = {
+            name: "A",
+            age: "35",
+            showInfo: function() {
+                $("#showInfo").text("This is" + this.name + "-" + this.age + "years old")
+            }
+        }
+
+        $("#click").click(user.showInfo);
+    </script>
+</body>
+
+</html>
+function getNamePerson() { return this.name_person } window.getNamePerson() // hue -> trỏ tới object window getNamePerson()
+</script>
+</body>
+
+</html>
+<!-- Local Storage 
+
+    Có 5 phương thức: -setItem: thêm dữ liệu
+                      -getItem: lấy dữ liệu
+                      -removeItem: xóa dư liệu
+                      -clear: xóa all dữ liệu
+                      -key: lấy tên key của dữ liệu
+-->
+
+<!-- SetItem (key,value)-->
+<script>
+    var user = {
+        firstName: "John",
+        sayThis(sayHi) {
+            sayHi();
+        }
+    }
+    var sayHi = function() {
+        console.log(`this is, ${this}!`); // this is, [Object object]
+        console.log('this is window?', this === window); // false
+        console.log('Firstname is ', this.firstName); // John
+    };
+
+    // gọi function
+    // tham số hàm sayHi có context lúc này là user
+    user.sayThis(sayHi.bind(user));
+
+
+
+    localStorage.setItem('UserName', 'Clone')
+        /* GetItem */
+
+    //call apply binding 
+
+
+    localStorage.getItem('UserName')
+
+    /* removeItem */
+
+    localStorage.removeItem('UserName')
+
+    /* Clear */
+
+    localStorage.clear()
+
+    /*  SessionStorage
+        
+        Dữ liệu sẽ bị mất đi khi đóng trinhf duyệt 
+        - Dữ liệu lưu trữ trên mỗi tab đều khác nhau
+        
+
+        localStorage vs sessionStorage:
+        
+            - Dữ liệu chỉ lưu trữ ở khách, không gửi kèm trong các request=> giảm dung lươngj tải khi load lên từ server
+            - 
+        
+    */
+</script>
+
+
+
+</body>
+
+</html>

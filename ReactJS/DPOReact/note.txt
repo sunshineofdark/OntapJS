@@ -1,0 +1,549 @@
+// Kn react
+// jSx
+// react-dom 
+// component -
+ life cyclie
+state stateful
+props
+react context
+react route-dom
+hooks
+axios
+
+binding data
+unmounting
+    =================================================================================
+
+    1. Khái niệm React Js
+
+        - Là 1 thư viện viết bằng JavaCript, dung để xây dựng giao diện người dùng UI
+        => chia các UI phức tạp => các component
+
+        => SPA
+    2. JSX: JavaScript XML
+        -library
+
+        - 1 template languages nhưng nó mang lại hầu hết tính nắng của JavaScript.
+        => viết các đoạn mã HTML
+            + Xây dựng ứng dụng React 1 cách nhanh hơn => tối ưu việc complice sang
+                Javascript
+            + Dễ phát hiện ra lỗi
+
+//dOM ẢO
+ virtual dom// dom thực
+
+ 
+
+    3. React-Dom(Document object model)
+        - Cầu nối react và dom => tạo ra các element kết nối với react
+        - Chữ cái đầu trong Component phải được viết hoa
+        - Các phương thức DOM cho phép chúng ta truy cập đến cây cấu trúc và thay đổi cấu trúc, dữ liệu, style, nội dung của document.
+
+        const myElement = React.createElement('h1', {}, 'Welcome');
+
+
+        Virtual DOM (VDOM hay DOM ảo) , là cách thể hiện DOM thật của một trang web dưới dạng các Javascript object. Khi thay đổi state của app thì VDOM sẽ được cập nhật lại và so sánh với VDOM cũ (VDOM cũ được đồng bộ hóa với DOM thật trước đó) bằng thuật toán gọi là diffing hay change detection để tìm ra những node cần thay đổi. Cuối cùng nó sẽ cập nhật những node đó trên DOM thật.
+         
+            Một lợi ích gắn liền khi sử dụng React là chúng ta có thể kiểm soát việc 
+         re-render của các component bằng cách sử dụng phươnt thức shouldComponentUpdate và setState.   
+        class Header extends React.Component{
+            render(){
+                return <div> Welcome </div>
+            }
+            }
+
+    4. Lifecycle: vòng đời của 1 component
+
+        - Được xem là vòng đời hay chu kì của một component, từ lúc khởi tạo, cập nhật và kết thúc.
+        - 1 component được khởi chạy qua 3 giai đoạn:
+        
+            + Mounting
+            + Updating
+            + Unmounting
+=====================================================================================            
+        - Mounting:
+            + Đặt các elements vào DOM
+            -Có 4 method để gọi khi thêm vào DOM
+                1. constructor()
+                2. getDerivedStateFromProps()
+                3.render(): bắt buộc phải được gọi
+                4.componentDidmount()
+            -constructor
+                + phương thức được gọi trước khi mọi thứ xảy ra
+                + được gọi với props, như là các đối số, và bạn phải luôn bắt đầu bằng cách gọi super(props)=> khởi tạo constructor của cha và cho phép thành phần kế thừa các phương thức từ cha chủa nó(React.Component)
+                - Ví dụ
+                class Header extends React.Component {
+                    constructor(props) {
+                        super(props);
+                        this.state = {favoritecolor: "red"};
+                    }
+                    render() {
+                        return (
+                        <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+                        );
+                    }
+                    }
+
+                    ReactDOM.render(<Header />, document.getElementById('root'));
+                - getDerivedStateFronProps
+                    + Được gọi ngay khi hiển thị các phần tử trong DOM
+                    + Nhận 1 đối số và trả về 1 object để thay đổi trạng thái
+
+
+                    class Header extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.state = { favoritecolor: "red" };
+                        }
+                        static getDerivedStateFromProps(props, state) {
+                            return { favoritecolor: props.favcol };
+                        }
+                        render() {
+                            return (
+                                <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+                            );
+                        }}
+
+                - render()
+                    + phương thức bắt buộc phải có, xuất HTML ra DOM
+
+                    - Ví dụ:
+                    class Header extends React.Component {
+                        render() {
+                            return (
+                                <h1>This is the content of the Header component</h1>
+                            );
+                        }
+                    }
+
+                    ReactDOM.render(<Header />, document.getElementById('root'));
+
+                - componentDidMount
+                    +Thường dùng để fetch dữ liệu từ server và sau đó setState để render dữ liệu ra.
+                    + Được gọi sau khi component được render
+                    class App extends React.Component {
+                        constructor(props) {
+                            super(props);
+                            this.state = { favoritecolor: "red" };
+                        }
+                        componentDidMount() {
+                            setTimeout(() => {
+                            this.setState({ favoritecolor: "yellow" })
+                            }, 1000)
+                        }
+                        render() {
+                            return (
+                            <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+                            );
+                        }
+                        }
+=====================================================================================
+
+            - Updating
+
+                1 component được update bất cứ khi nào có sự thay đổi của
+                state hoặc props
+            - Có 5 phương thức update
+
+                1.getDerivedStateFromProps()
+                2.shouldComponentUpdate()
+                3.render()
+                4.getSnapshotBeforeUpdate()
+                5.componentDidUpdate()
+
+            *********************************************************************
+                1. getDerivedStateFromProps()
+                + Đây là phương thức đầu tiên được gọi khi cập nhật
+                + Không thể call this hay call function
+                
+
+
+
+
+
+
+
+            *********************************************************************
+
+                2. shouldComponentUpdate
+                    + trả về kết quả true hoặc false 
+                    + Giúp nhận biết được component này được cập nhật hay không cập nhật. Giá trị mặc định là true. 
+                    + nếu ko cần render lại sau khi state hoặc props được cập nhật thì có thể trả về false
+                class Header extends React.Component {
+                    constructor(props) {
+                        super(props);
+                        this.state = { favoritecolor: "red" };
+                    }
+                    shouldComponentUpdate() {
+                        return true;
+                    }
+                    changeColor = () => {
+                        this.setState({ favoritecolor: "blue" });
+                    }
+                    render() {
+                        return (
+                            <div>
+                                <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+                                <button type="button" onClick={this.changeColor}>Change color</button>
+                            </div>
+                        );
+                    }
+                }
+            
+            *********************************************************************
+
+                3. render()
+
+            + được gọi khi component được update => render lại HTML ra DOM
+            với thay đổi mới
+
+            *********************************************************************
+
+                4.getSnapshotBeforeUpdate()
+                class Header extends React.Component {
+                    constructor(props) {
+                        super(props);
+                        this.state = { favoritecolor: "red" };
+                    }
+                    // static getDerivedStateFromProps(props, state) {
+                    //     console.log("getDerivedStateFromProps")
+                    //     return { favoritecolor: props.favcol };
+
+                    // }
+                    getSnapshotBeforeUpdate() {
+                        console.log(this.state.favoritecolor)
+                    }
+                    shouldComponentUpdate() {
+                        console.log("shouldComponentUpdate")
+                        return true
+                    }
+
+                    componentDidUpdate(prevProps, prevState) {
+                        alert(1)
+                        console.log("componentDidUpdate")
+                        if (prevState.favoritecolor !== this.state.favoritecolor) {
+                            this.setState({
+                                favoritecolor: "blue"
+                            })
+                        }
+
+                    }
+                    componentDidMount() {
+                        console.log("componentdidmount")
+
+                    }
+
+                    render() {
+
+                        return (
+                            <>
+                                <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+                                <button onClick={() => this.setState({ favoritecolor: "blue" })}>Click me</button>
+                                <button onClick={() => this.setState({ favoritecolor: "black" })}>Click me2</button>
+                            </>
+                        );
+                    }
+                }
+
+
+            + được gọi trước khi re-render thành công
+            + có quyền truy cập vào các props và state trước khi cập nhật
+             nghĩa là ngay cả sau khi cập nhật=> có thể kiểm tra các giá trị trước khi cập nhật
+            + phải bao gồm phương thức componentDidUpdate()=> lỗi
+
+                5.componentDidUpdate()
+
+
+
+         *********************************************************************
+
+         Unmounting
+
+              Quá trình xảy ra khi component bị remove khỏi DOM, componentUnmount sẽ
+            được gọi khi render ra không có component nào hoặc người dùng chuyển hướng trang web hoặc khi component bị xóa khỏi DOM
+
+        class Container extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {show: true};
+                }
+                delHeader = () => {
+                    this.setState({show: false});
+                }
+                render() {
+                    let myheader;
+                    if (this.state.show) {
+                    myheader = <Child />;
+                    };
+                    return (
+                    <div>
+                    {myheader}
+                    <button type="button" onClick={this.delHeader}>Delete Header</button>
+                    </div>
+                    );
+                }
+                }
+
+                class Child extends React.Component {
+                componentWillUnmount() {
+                    alert("The component named Header is about to be unmounted.");
+                }
+                render() {
+                    return (
+                    <h1>Hello World!</h1>
+                    );
+                }
+                }
+
+        ====================================================================
+
+
+        Data binding
+
+            - Đồng bộ dữ liệu giữa component và view (html)
+                                                               
+            1. One-way data binding
+                Dữ liệu trong React sẽ chỉ được truyền theo 1 chiều duy nhất, đó là từ HTML=> state
+
+                class Header extends React.Component {
+                    constructor() {
+                        super();
+                        this.state = {
+                            subject: ""
+                        }
+                    }
+
+                    handleChange = event => {
+                        this.setState({
+                            subject: event.target.value
+                        })
+                    }
+
+                    render() {
+
+                        return (
+                            <>
+                                <h4>Hello</h4>
+                                <input type="text" placeholder='Nhập chữ' onChange={this.handleChange} />
+                                <p><b>{this.state.subject}</b></p>
+                            </>
+                        );
+                    }
+                } 
+
+
+                ===========
+                class Header extends React.Component {
+                    constructor() {
+                        super();
+                        this.state = {
+                            subject: ""
+                        }
+                    }
+
+                    randomGift() {
+                        const index = Math.floor(Math.random() * 3)
+                        this.setState({
+                            subject: gifts[index]
+                        })
+                        console.log(index)
+                    }
+                    render() {
+
+                        return (
+                            <>
+                                <h1>{this.state.subject || 'Chưa có phần thưởng'}</h1>
+                                <button onClick={this.randomGift}>Lấy thưởng</button>
+                            </>
+                        );
+                    }
+                }
+            2. Two-way binding data
+                - Ví dụ 1: Input
+                    class Header extends React.Component {
+                        constructor() {
+                            super();
+                            this.state = {
+                                name: "",
+                                email: ""
+                            }
+                        }
+                        handleSubmit = () => {
+                            var name = this.state.email;
+                            var email = this.state.name;
+                            console.log({ name, email })
+                        }
+                        render() {
+                            return (
+                                <>
+                                    <h4>Hello</h4>
+                                    <input type="text" placeholder='Nhập tên' onChange={e => this.setState({
+                                        name: e.target.value
+                                    })} value={this.state.name} />
+
+                                    <input type="email" placeholder='Nhập email' onChange={event => this.setState({
+                                        email: event.target.value
+                                    })} value={this.state.email} />
+                                    <p><b>{this.state.name}</b></p>
+                                    <p><b>{this.state.email}</b></p>
+
+                                    <button onClick={this.handleSubmit}> Register </button>
+                                </>
+                            );
+                        }
+                    }
+                - Ví dụ 2: Radio checkbox
+                     class Header extends React.Component {
+                        constructor() {
+                            super();
+                            this.state = {
+                                checked: ""
+                            }
+                        }
+
+                        handleSubmit = () => {
+
+                        }
+                        render() {
+                            return (
+                                <>
+                                    {course.map(course => (
+                                        <div key={course.id}>
+                                            <input type="radio"
+                                                checked={this.state.checked === course.id}
+                                                onChange={() =>
+                                                    this.setState({
+                                                        checked: course.id
+                                                    })
+
+                                                }
+                                            />
+                                            {course.name}
+                                        </div>
+                                    ))}
+                                    <button onClick={this.handleSubmit}> Register </button>
+                                </>
+                            );
+                        }
+                    }
+                - Ví dụ 3: Checkbox
+
+                const course = [
+                        {
+                            id: 1,
+                            name: 'HTML,CSSS'
+                        },
+                        {
+                            id: 2,
+                            name: 'React JS'
+                        },
+                        {
+                            id: 3,
+                            name: 'CSharp'
+                        }
+                    ]
+
+
+                    class Header extends React.Component {
+                            constructor() {
+                                super();
+                                this.state = {
+                                    checked: []
+                                }
+                            }
+                            handleSubmit = () => {
+                                console.log({ id: this.state.checked })
+                            }
+                            handleCheck = (id, prev) => {
+                                const isCheck = this.state.checked.includes(id)
+
+                                if (isCheck) {
+                                    return this.state.checked.filter(item => item != id)
+                                } else {
+                                    this.setState({
+                                        checked: [...prev, id]
+                                    })
+                                }
+                            }
+                            render() {
+                                return (
+                                    <>
+                                        {course.map(course => (
+                                            <div key={course.id}>
+                                                <input type="checkbox"
+                                                    checked={this.state.checked.includes(course.id)}
+                                                    onChange={() => this.handleCheck(course.id, this.state.checked)}
+                                                />
+                                                {course.name}
+                                            </div>
+                                        ))}
+                                        <button onClick={this.handleSubmit}> Register </button>
+                                    </>
+                                );
+                            }
+                        }
+
+    //component kế thừa props từ thằng cha
+
+
+        - Ví dụ 4: Select 
+
+            class Header extends React.Component {
+                constructor() {
+                    super();
+                    this.state = {
+                        options: ['Việt Nam', 'Lào', 'Campuchia'],
+                        selectedOption: 'Việt Nam'
+                    }
+                }
+                handleChange(e) {
+                    this.setState(prev => ({
+                        options: [...prev, e]
+                    }))
+                }
+                render() {
+                    return (
+                        <>
+                            <select name='selectedOption' onChange={this.handleChange}>
+                                {this.state.options.map(x => (
+                                    x == this.state.selectOption ? (
+                                        <option value={x} selected ></option>
+                                    ) : (<option value={x}>{x}</option>)
+                                ))}
+                            </select>
+                            <button onClick={this.handleSubmit}> Register </button>
+                        </>
+                    );
+                }
+            }
+        - Vi du 5:
+
+    ==========================================================================
+
+        1.Stateful Components
+
+            - Stateless là tình trạng phi trạng thái
+            - Là thiết kế không lưu dữ liệu của client trên server 
+             client => gửi dữ liệu => server => thực thi,trả kết quả
+                => Quan hệ giữa client và server sẽ bị cắt đứt
+                => Server sẽ ko lưu dữ liệu của client
+                Chỉ có 1 yêu cầu và 1 phản hồi
+            - Bị gián đoạn thì sẽ phải thực thi lại
+
+
+        2. Stateful
+
+            - Stateful là tình trạng trạng thái.
+            - Server cần lưu dữ liệu của client => có sự ràng buộc
+            - Dữ liệu sẽ được lưu trữ sau mỗi lần request của client
+            => lưu vào server 
+            - 1 hoạt động bị gián đoạn thì sẽ đc lưu trữ để có thể tiếp tục ở vị trí mà đang dừng lại.
+            - Cần 1 máy chủ để xử lí tất cả yêu cầu 
+
+
+        3. React.PureComponent
+
+            - Thực hiện so sánh props và state để quyết định re-render lại hay không
+            - React.Component: sẽ re-render kể cả khi prop và state ko đổi
+
+

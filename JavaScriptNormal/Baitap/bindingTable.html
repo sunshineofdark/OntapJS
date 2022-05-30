@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+
+        Arrow Function sử dụng ký tư =>   ( có thể bỏ từ khóa return)
+        Function thông thường sử dụng  : function
+
+
+
+        THIS
+
+        - This dùng để trở tới chính object gọi hàm đó 
+
+
+     -->
+    <script>
+        const name_person = 'hue' // bien nay nam trong object window
+
+        function getNamePerson() {
+            return this.name_person
+        }
+
+        window.getNamePerson() // hue -> trỏ tới object window
+        getNamePerson()
+    </script>
+</body>
+
+</html> <label for="">ID</label>
+<input type="number" id="id">
+</div>
+<div>
+    <label for="">Name</label>
+    <input type="text" id="name">
+</div>
+<div>
+    <label for="">Price</label>
+    <input type="number" id="price">
+</div>
+<div>
+    <button onclick="add()">Thêm mới</button>
+</div> -->
+<table class="table" id="readData">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+</table>
+
+
+
+<script>
+    const coures = [{
+        Id: 1,
+        NameCourse: 'JavaScript',
+        Price: 1000
+    }, {
+        Id: 2,
+        NameCourse: 'C#',
+        Price: 2000
+    }, {
+        Id: 3,
+        NameCourse: 'Python',
+        Price: 1500
+    }];
+
+
+
+    const add = () => {
+        var id = document.getElementById('id').value;
+        var nameCourse = document.getElementById('name').value;
+        var price = document.getElementById('price').value;
+
+
+        var data = {
+            Id: id,
+            NameCourse: nameCourse,
+            Price: price
+        }
+
+        let index = coures.findIndex(c => c.Id == data.Id)
+
+        // if (data.Id === "" || data.NameCourse === "" || data.Price === "") {
+        //     alert("Bạn phải nhập dữ liệu")
+        // } else {
+
+
+        // }
+        if (index >= 0) {
+            coures.splice(index, 1, data)
+        } else {
+            for (let i = 0; i < coures.length; i++) {
+                if (id == coures[i].Id) {
+                    id = parseInt(coures[i].Id) + 1;
+                }
+            }
+            coures.push(data)
+        }
+
+
+        readData()
+    };
+
+
+    //con trỏ this arrow fc
+    /*
+                    localStorage/sessionStorage
+
+                    Cookies
+
+     */
+
+    const readData = () => {
+        table = `
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Actions</th>
+            </tr>
+            `
+        for (let i = 0; i < coures.length; i++) {
+            table +=
+                `
+                <tr>
+                    <td>${coures[i].Id}</td>
+                    <td>${coures[i].NameCourse}</td>
+                    <td>${coures[i].Price}</td>
+                    <th><button onclick="deleteItem(${coures[i].Id})">Delete</button></th>
+                    <th><button onclick="editItem(${coures[i].Id})">Edit</button></th>
+                </tr>
+                `
+        }
+        document.getElementById("readData").innerHTML = table
+    };
+
+    const deleteItem = (id) => {
+        for (let i = 0; i < coures.length; i++) {
+            if (coures[i].Id == id) {
+                coures.splice(i, 1)
+                readData()
+            }
+        }
+    };
+
+    const editItem = (id) => {
+
+        for (let i = 0; i < coures.length; i++) {
+            if (coures[i].Id == id) {
+                document.getElementById('id').value = coures[i].Id
+                document.getElementById('name').value = coures[i].NameCourse
+                document.getElementById('price').value = coures[i].Price
+            }
+        }
+    };
+</script>
+</body>
+
+</html>

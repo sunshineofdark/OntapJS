@@ -9,18 +9,25 @@
 </head>
 
 <body>
-    <ul id="menu" class="vertical main">
-        <li>Homepage</li>
-        <li>Services</li>
-        <li>About</li>
-        <li>Contact</li>
-    </ul>
+    <ui id="app">
+        <li>JavaScrips</li>
+    </ui>
 
     <script>
-        let menu = document.querySelector('#menu')
-        menu.className += "api web"
-        console.log(menu.className)
+        let app = document.querySelector('#app')
+
+        let langs = ['TypeScripts', 'HTML', 'CSS', 'Java', 'C#']
+
+        let nodes = langs.map(x => {
+            let li = document.createElement('li')
+            li.textContent = x
+            return li
+        })
+
+        app.append(...nodes)
     </script>
 </body>
+
+</html>
 
 </html>

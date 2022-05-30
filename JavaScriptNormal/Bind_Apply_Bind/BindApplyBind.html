@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+     Bind ràng buộc this thành các đối tượng mong muốn
+ -->
+
+    <button>CLick me</button>
+    <script>
+        this.firstName = 'Nguyễn'
+        this.lastName = 'Hoàng'
+
+        const dad = {
+                firstName: 'Trần',
+                lastName: 'Tiến',
+
+                getFullname() {
+                    console.log(`${this.firstName} ${this.lastName}`)
+                }
+            }
+            // const son={
+            //     firstName: 'Trần',
+            //     lastName: 'Tiến',
+            // }
+            // console.log("ten,", dad.getFullname())
+            // const getName = dad.getFullname.bind(dad)
+            // console.log(getName())
+
+        const button = document.querySelector('button')
+
+        button.onclick = dad.getFullname.bind(dad)
+    </script>
+</body>
+
+</html>

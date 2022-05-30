@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+
+        Arrow Function sử dụng ký tư =>   ( có thể bỏ từ khóa return)
+        Function thông thường sử dụng  : function
+
+
+
+        THIS
+
+        - This dùng để trở tới chính object gọi hàm đó 
+
+
+     -->
+    <script>
+        const name_person = 'hue' // bien nay nam trong object window
+
+        function getNamePerson() {
+            return this.name_person
+        }
+
+        window.getNamePerson() // hue -> trỏ tới object window
+        getNamePerson()
+
+        console.log(window.getNamePerson())
+        console.log(getNamePerson.bind(name_person))
+    </script>
+</body>
+
+</html>

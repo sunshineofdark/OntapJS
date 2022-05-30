@@ -6,37 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        #container {
-            width: 200px;
-            height: 200px;
-            background: green;
-            position: relative;
-        }
-        
-        #box {
-            width: 50px;
-            height: 50px;
-            background: red;
-            position: absolute;
-        }
-    </style>
 </head>
 
 <body>
-    <div id="container">
-        <div id="box"> </div>
+    <div id="root">
+        <p id="p1">Đoạn văn 1</p>
+        <p id="p2">Đoạn văn 2</p>
     </div>
-    <script>
-        // vị trí bắt đầu
-        var pos = 0;
-        //lấy hộp box
-        var box = document.getElementById("box");
 
-        function move() {
-            pos += 1;
-            box.style.left = pos + "px"; //px = pixels
-        }
+    <script>
+        var p = document.createElement('p')
+        p.innerText = "Đoạn văn 3"
+
+        var p1 = document.getElementById('p1')
+
+        var root = document.getElementById('root')
+        root.replaceChild(p, p1)
     </script>
 </body>
 
